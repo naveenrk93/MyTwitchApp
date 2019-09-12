@@ -28,17 +28,16 @@ class StreamList extends React.Component{
 
     renderList = () => {
         return this.props.streams.map(stream => {
+
             return(
-                <div className="item"
+                <div className="item myhover"
                     key={stream.id}
                     onClick={()=>{history.push(`/streams/${stream.id}`)}}
-                    style={{padding:"14px"}}
+                    style={{padding:"14px", backgroundColor:"white", "&:hover":"background-color:gray"}}
                 >
-
                             {this.renderAdminButtons(stream)}
                             <i className="large middle aligned icon camera" style={{float:"left"}}/>
-                            <div className="content" style={{width:"auto",float:"left"}}>
-
+                            <div className="content" style={{width:"auto",float:"left"}} >
                                 <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
                                 <div className="description">{stream.description}</div>
                             </div>

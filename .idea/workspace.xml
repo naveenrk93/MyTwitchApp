@@ -24,6 +24,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RunDashboard">
@@ -54,7 +55,7 @@
       <workItem from="1568196737300" duration="2339000" />
       <workItem from="1568199165475" duration="14970000" />
       <workItem from="1568224509691" duration="1139000" />
-      <workItem from="1568281312865" duration="19828000" />
+      <workItem from="1568281312865" duration="28293000" />
     </task>
     <servers />
   </component>

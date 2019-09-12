@@ -38,12 +38,13 @@ export const fetchStreams = () => async dispatch => {
   const response = await streams.get('/streams');
   const LiveStreams = await RTMP.get('/api/streams');
   const actualResponse = response.data.map((stream => {
-      if(LiveStreams.data.live && LiveStreams.data.live.length>=stream.id && LiveStreams.data.live[stream.id])
+      if(LiveStreams.data.live && LiveStreams.data.live.length>stream.id && LiveStreams.data.live[stream.id] && LiveStreams.data.live[stream.id].publisher)
           return {...stream, isLive: true};
       else
           return {...stream, isLive: false};
 
   }));
+
   dispatch({
       type: FETCH_STREAMS,
       payload: actualResponse
