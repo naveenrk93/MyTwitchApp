@@ -14,8 +14,8 @@ class StreamList extends React.Component{
         if(this.props.currentUserId && stream.userId === this.props.currentUserId){
             return (
                 <div className="right floated content">
-                    <Link to={`/streams/edit/${stream.id}`} className="ui button primary">Edit</Link>
-                    <Link to={`/streams/delete/${stream.id}`} className="ui button negative">Delete</Link>
+                    <Link to={`/streams/edit/${stream.id}`} onClick={(event)=>{event.stopPropagation()}} className="ui button primary">Edit</Link>
+                    <Link to={`/streams/delete/${stream.id}`} onClick={(event)=>{event.stopPropagation()}} className="ui button negative">Delete</Link>
                 </div>
             );
         }
@@ -23,7 +23,9 @@ class StreamList extends React.Component{
 
     renderLiveIcon = (stream) =>{
            if(stream.isLive)
-                return <button className="ui tiny red basic button" style={{position:"relative", left:"20px"}}>Live Stream</button>
+                return <button className="ui tiny green basic button" style={{float:"left", width:"120px"}}>LIVE</button>;
+            else
+                return <button className="ui tiny red basic button" style={{float:"left", width:"120px"}}>OFFLINE</button>
     };
 
     renderList = () => {
@@ -34,17 +36,13 @@ class StreamList extends React.Component{
                     key={stream.id}
                     onClick={()=>{history.push(`/streams/${stream.id}`)}}
                     style={{padding:"14px", backgroundColor:"white", "&:hover":"background-color:gray"}}
-                >
+                >           {this.renderLiveIcon(stream)}
                             {this.renderAdminButtons(stream)}
-                            <i className="large middle aligned icon camera" style={{float:"left"}}/>
-                            <div className="content" style={{width:"auto",float:"left"}} >
+                            <i className="large middle aligned icon camera" style={{position:"relative", left:"15px", top:"5px",float:"left"}}/>
+                            <div className="content" style={{position:"relative", left:"20px",width:"auto", float:"left"}} >
                                 <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
                                 <div className="description">{stream.description}</div>
                             </div>
-                            <div>
-                                {this.renderLiveIcon(stream)}
-                            </div>
-
                 </div>
 
             );
