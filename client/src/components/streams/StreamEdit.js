@@ -16,7 +16,6 @@ class StreamEdit extends React.Component{
     };
 
     render(){
-        // console.log(this.props);
      return (
          <div>
              <h2>Edit Stream</h2>

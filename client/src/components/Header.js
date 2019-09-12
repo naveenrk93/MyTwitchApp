@@ -4,10 +4,11 @@ import GoogleAuth from "./GoogleAuth";
 
 const Header = () => {
   return (
-      <div className="ui secondary pointing menu">
-          <Link to="/" className="item">MyTwitch</Link>
-          <div className="right menu">
-              <Link to="/" className="item">
+      <div className="ui menu" style={{backgroundColor:"#6441A4"}}>
+          <div className="item"><i className="inverted twitch large icon"></i></div>
+          <Link to="/" className="item" style={{color:"white", fontSize:"16px"}}>MyTwitch</Link>
+          <div className="right menu" style={{padding:"5px"}}>
+              <Link to="/" className="item" style={{color:"white", fontSize:"16px"}}>
                   All Streams
               </Link>
               <GoogleAuth/>

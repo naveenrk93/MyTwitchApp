@@ -14,8 +14,8 @@ const App = () => {
         <div>
 
             <Router history={history}>
+                <Header/>
                 <div className="ui container">
-                    <Header/>
                     <Switch>
                         <Route path="/" exact component={StreamList} />
                         <Route path="/streams/edit/:id" exact component={StreamEdit} />

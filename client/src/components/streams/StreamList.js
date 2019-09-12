@@ -2,6 +2,7 @@ import React from 'react';
 import {fetchStreams} from "../../actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import history from "../../history";
 
 class StreamList extends React.Component{
 
@@ -10,7 +11,6 @@ class StreamList extends React.Component{
     }
 
     renderAdminButtons = (stream) => {
-        console.log(this.props.currentUserId);
         if(this.props.currentUserId && stream.userId === this.props.currentUserId){
             return (
                 <div className="right floated content">
@@ -21,17 +21,33 @@ class StreamList extends React.Component{
         }
     };
 
+    renderLiveIcon = (stream) =>{
+           if(stream.isLive)
+                return <button className="ui tiny red basic button" style={{position:"relative", left:"20px"}}>Live Stream</button>
+    };
+
     renderList = () => {
         return this.props.streams.map(stream => {
             return(
-                <div className="item" key={stream.id}>
-                    {this.renderAdminButtons(stream)}
-                    <i className="large middle aligned icon camera"/>
-                    <div className="content">
-                        <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
-                        <div className="description">{stream.description}</div>
-                    </div>
+                <div className="item"
+                    key={stream.id}
+                    onClick={()=>{history.push(`/streams/${stream.id}`)}}
+                    style={{padding:"14px"}}
+                >
+
+                            {this.renderAdminButtons(stream)}
+                            <i className="large middle aligned icon camera" style={{float:"left"}}/>
+                            <div className="content" style={{width:"auto",float:"left"}}>
+
+                                <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
+                                <div className="description">{stream.description}</div>
+                            </div>
+                            <div>
+                                {this.renderLiveIcon(stream)}
+                            </div>
+
                 </div>
+
             );
         });
     };
@@ -48,8 +64,8 @@ class StreamList extends React.Component{
     render = () => {
         return (
             <div>
-                <h2>Streams</h2>
-                <div className="ui celled list">{this.renderList()}</div>
+                <h1 className="ui center aligned violet header">Streams</h1>
+                <div className="ui celled list" style={{border:"3px dashed #6441A4"}}>{this.renderList()}</div>
                 {this.renderCreate()}
             </div>
         );

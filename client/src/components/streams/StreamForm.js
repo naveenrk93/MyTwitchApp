@@ -15,7 +15,6 @@ class StreamForm extends React.Component{
 
     renderInput = (formProps) => {
         const ClassName= `field ${formProps.meta.error&&formProps.meta.touched?"error":""}`;
-        console.log(this.props);
         return (
             <div className={ClassName}>
                 <label>{formProps.label}</label>
@@ -30,7 +29,6 @@ class StreamForm extends React.Component{
     };
 
     render(){
-        console.log(this.props);
         return (
             <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field name="title" component={this.renderInput} label="Enter Title"/>

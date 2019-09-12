@@ -9,6 +9,7 @@ import {
 } from "./types";
 import history from "../history";
 import streams from "../apis/streams";
+import RTMP from "../apis/RTMP";
 
 export const signIn = (userId) => {
     return{
@@ -25,7 +26,7 @@ export const signOut = () => {
 
 export const createStream = formValues => async (dispatch, getState) => {
     const userId = getState().auth.userId;
-    const response = await streams.post("/streams", { ...formValues, userId });
+    const response = await streams.post("/streams", { ...formValues, userId, isLive:false });
     dispatch({
         type: CREATE_STREAM,
         payload: response.data
@@ -35,9 +36,17 @@ export const createStream = formValues => async (dispatch, getState) => {
 
 export const fetchStreams = () => async dispatch => {
   const response = await streams.get('/streams');
+  const LiveStreams = await RTMP.get('/api/streams');
+  const actualResponse = response.data.map((stream => {
+      if(LiveStreams.data.live && LiveStreams.data.live.length>=stream.id && LiveStreams.data.live[stream.id])
+          return {...stream, isLive: true};
+      else
+          return {...stream, isLive: false};
+
+  }));
   dispatch({
       type: FETCH_STREAMS,
-      payload: response.data
+      payload: actualResponse
   });
 };
 
